@@ -1,4 +1,4 @@
-import { useCallback, useRef } from "react";
+import { useCallback } from "react";
 import { useAppDispatch, useAppSelector } from "./hooks";
 import { setFilms, toggleLoading } from "./store/slices/filmsSlice";
 import CategoryButton from "./components/CategoryButton";
@@ -7,7 +7,6 @@ import Loading from "./Loading";
 import { fetchFilms } from "./utils/api";
 
 function App() {
-  const myRef = useRef<HTMLButtonElement>(null);
   const { isLoading } = useAppSelector((state) => state.films);
   const dispatch = useAppDispatch();
 
@@ -26,7 +25,7 @@ function App() {
 
   return (
     <div className="App">
-      <CategoryButton onClick={getFilms} category="mystery" ref={myRef} />
+      <CategoryButton onClick={getFilms} category="mystery" />
       {isLoading ? <Loading /> : <ListOfFilms />}
     </div>
   );
