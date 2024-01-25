@@ -4,6 +4,7 @@ import { setFilms, toggleLoading } from "./store/slices/filmsSlice";
 import CategoryButton from "./components/CategoryButton";
 import ListOfFilms from "./components/ListOfFilms";
 import Loading from "./Loading";
+import { fetchFilms } from "./utils/api";
 
 function App() {
   const myRef = useRef<HTMLButtonElement>(null);
@@ -13,9 +14,9 @@ function App() {
   const getFilms = useCallback(
     (genre: string = "mystery") => {
       dispatch(toggleLoading(true));
+
       setTimeout(async () => {
-        const data = await fetch(`https://api.sampleapis.com/movies/${genre}`);
-        const filmsData = await data.json();
+        const filmsData = await fetchFilms(genre);
         dispatch(setFilms({ films: filmsData }));
         dispatch(toggleLoading(false));
       }, 3000);
