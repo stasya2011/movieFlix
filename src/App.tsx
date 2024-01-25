@@ -1,24 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useCallback, useRef } from "react";
+import { useAppDispatch, useAppSelector } from "./hooks";
+import { setFilms, toggleLoading } from "./store/slices/filmsSlice";
+import CategoryButton from "./components/CategoryButton";
+import ListOfFilms from "./components/ListOfFilms";
+import Loading from "./Loading";
 
 function App() {
+  const myRef = useRef<HTMLButtonElement>(null);
+  const { isLoading } = useAppSelector((state) => state.films);
+  const dispatch = useAppDispatch();
+
+  const getFilms = useCallback(
+    (genre: string = "mystery") => {
+      dispatch(toggleLoading(true));
+      setTimeout(async () => {
+        const data = await fetch(`https://api.sampleapis.com/movies/${genre}`);
+        const filmsData = await data.json();
+        dispatch(setFilms({ films: filmsData }));
+        dispatch(toggleLoading(false));
+      }, 3000);
+    },
+    [dispatch]
+  );
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <CategoryButton onClick={getFilms} category="mystery" ref={myRef} />
+      {isLoading ? <Loading /> : <ListOfFilms />}
     </div>
   );
 }
