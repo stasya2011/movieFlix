@@ -4,10 +4,12 @@ import styles from "./listOfFilms.module.scss";
 import { setFilms, toggleLoading } from "../../store/slices/filmsSlice";
 import FilmItem from "../FilmItem";
 import Form from "../Form";
+import Loading from "../Loading";
+import ListOfEndpoints from "../ListOfEndpoints";
 
-const ListOfFilms = () => {
+const ListOfFilms = ({ getFilms }: { getFilms: (str: string) => void }) => {
   const dispatch = useAppDispatch();
-  const { films } = useAppSelector((state) => state.films);
+  const { films, isLoading } = useAppSelector((state) => state.films);
   const ref = useRef<HTMLInputElement | null>(null);
 
   const backToPrevState = (films: string) => {
@@ -38,21 +40,28 @@ const ListOfFilms = () => {
   };
 
   return (
-    <div className={styles.wrapper}>
-      {films.length ? (
-        <>
-          <Form search={search} ref={ref} />
-
-          <ul className={styles["list-wrapper"]}>
-            {films.map((film) => (
-              <FilmItem film={film} />
-            ))}
-          </ul>
-        </>
+    <>
+      <ListOfEndpoints getFilms={getFilms} />
+      {isLoading ? (
+        <Loading />
       ) : (
-        "No result was found for your query."
+        <div className={styles.wrapper}>
+          {films.length ? (
+            <>
+              <Form search={search} ref={ref} />
+
+              <ul className={styles["list-wrapper"]}>
+                {films.map((film) => (
+                  <FilmItem film={film} />
+                ))}
+              </ul>
+            </>
+          ) : (
+            "No result was found for your query."
+          )}
+        </div>
       )}
-    </div>
+    </>
   );
 };
 

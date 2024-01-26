@@ -10,9 +10,14 @@ export interface IFilm {
 interface IFilms {
   films: IFilm[];
   isLoading: boolean;
+  currentCategory: string;
 }
 
-const initialState: IFilms = { films: [], isLoading: false };
+const initialState: IFilms = {
+  films: [],
+  isLoading: false,
+  currentCategory: "",
+};
 
 const FilmSlice = createSlice({
   initialState,
@@ -24,9 +29,12 @@ const FilmSlice = createSlice({
     toggleLoading(state, action: PayloadAction<boolean>) {
       state.isLoading = action.payload;
     },
+    swichCurrentCategory(state, action: PayloadAction<string>) {
+      state.currentCategory = action.payload;
+    },
   },
 });
 
 const { reducer, actions } = FilmSlice;
-export const { setFilms, toggleLoading } = actions;
+export const { setFilms, toggleLoading, swichCurrentCategory } = actions;
 export default reducer;

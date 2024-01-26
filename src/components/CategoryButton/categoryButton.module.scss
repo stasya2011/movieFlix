@@ -104,3 +104,7 @@
     }
   }
 }
+
+button:disabled:hover {
+  cursor: not-allowed;
+}

@@ -1,25 +1,34 @@
 import { useCallback } from "react";
 import { Routes, Route } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "./hooks";
-import { setFilms, toggleLoading } from "./store/slices/filmsSlice";
+import {
+  setFilms,
+  swichCurrentCategory,
+  toggleLoading,
+} from "./store/slices/filmsSlice";
 import { fetchFilms } from "./utils/api";
 import ListOfFilms from "./components/ListOfFilms";
-import Loading from "./components/Loading";
-import styles from "./App.module.scss";
 import Layout from "./components/Layout";
+import FilmPage from "./components/FilmPage";
+import styles from "./App.module.scss";
 
 function App() {
-  const { isLoading } = useAppSelector((state) => state.films);
   const dispatch = useAppDispatch();
+  const { currentCategory } = useAppSelector((state) => state.films);
 
   const getFilms = useCallback(
     (genre: string = "mystery") => {
       dispatch(toggleLoading(true));
-
+      dispatch(swichCurrentCategory(genre));
       setTimeout(async () => {
-        const filmsData = await fetchFilms(genre);
-        dispatch(setFilms({ films: filmsData }));
-        dispatch(toggleLoading(false));
+        try {
+          const filmsData = await fetchFilms(genre);
+          dispatch(setFilms({ films: filmsData }));
+        } catch (err) {
+          console.error("Ups...", err);
+        } finally {
+          dispatch(toggleLoading(false));
+        }
       }, 3000);
     },
     [dispatch]
@@ -28,8 +37,9 @@ function App() {
   return (
     <div className={styles.app}>
       <Routes>
-        <Route path="/" element={<Layout getFilms={getFilms} />}>
-          <Route index element={isLoading ? <Loading /> : <ListOfFilms />} />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<ListOfFilms getFilms={getFilms} />} />
+          <Route path={`/${currentCategory}/:id`} element={<FilmPage />} />
           <Route path="/note" element={<h2>Notes...</h2>} />
           <Route path="*" element={<h2>Error..</h2>} />
         </Route>
