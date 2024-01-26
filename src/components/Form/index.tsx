@@ -17,7 +17,7 @@ const Form = forwardRef<HTMLInputElement, ISearchProps>(({ search }, ref) => {
         className={styles["search-input"]}
         ref={ref}
         type="text"
-        placeholder=""
+        placeholder="Type name of film."
       />
       <button className={styles["search-button"]} type="submit">
         Search

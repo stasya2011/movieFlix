@@ -1,11 +1,13 @@
+@import "../../styles/constants.scss";
+
 .search-input,
 .search-button {
   font-size: 18px;
   line-height: 40px;
-  border: 2px solid #0505a9;
+  border: $borderW solid $cyan;
   border-radius: 20px;
   padding: 0 15px;
-  color: #0505a9;
+  color: $cyan;
 }
 .search-button {
   margin-left: 16px;
