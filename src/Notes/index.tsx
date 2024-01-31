@@ -27,6 +27,10 @@ const Notes = () => {
     }
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem("currentFilms", JSON.stringify(reviews));
+  }, [reviews]);
+
   const clearTextare = () => {
     if (myRef.current) {
       myRef.current.value = "";
@@ -46,7 +50,6 @@ const Notes = () => {
         },
       ];
     });
-    //
   };
 
   return (
@@ -68,10 +71,7 @@ const Notes = () => {
           />
           <ButtonElement
             action="Clear"
-            onClick={() => {
-              clearTextare();
-              localStorage.setItem("currentFilms", JSON.stringify(reviews));
-            }}
+            onClick={clearTextare}
             classNameList={"clear-btn"}
           />
         </div>
