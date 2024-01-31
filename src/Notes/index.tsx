@@ -7,7 +7,7 @@ import ButtonElement from "../components/custom-components/Button";
 import styles from "./list.module.scss";
 
 export interface IReview {
-  text: any;
+  text: string;
   data: string;
   id: string;
   checked: boolean;
@@ -16,6 +16,7 @@ export interface IReview {
 const Notes = () => {
   const [reviews, setReviews] = useState<IReview[]>([]);
   const [isFormOpen, setIsFilmOpen] = useState<boolean>(false);
+  const [editedReview, setEditedReview] = useState({ isEdit: false, id: "" });
   const { state } = useLocation();
   const myRef = useRef<HTMLTextAreaElement>(null);
 
@@ -48,26 +49,48 @@ const Notes = () => {
   };
 
   const submitForm = () => {
-    setReviews((prevState) => {
-      return [
-        ...prevState,
-        {
-          text: myRef.current?.value,
-          id: uuidv4(),
-          checked: false,
-          data: "date",
-          film: JSON.parse(state.film),
-        },
-      ];
-    });
+    if (!editedReview.isEdit) {
+      setReviews((prevState) => {
+        return [
+          ...prevState,
+          {
+            text: myRef.current ? myRef.current.value : "",
+            id: uuidv4(),
+            checked: false,
+            data: "date",
+            film: JSON.parse(state.film),
+          },
+        ];
+      });
+    } else {
+      setReviews((prevState) =>
+        prevState.map((el) => {
+          if (el.id === editedReview.id && myRef.current) {
+            el.text = myRef.current.value;
+          }
+          return el;
+        })
+      );
+    }
 
     setIsFilmOpen(() => false);
+    setEditedReview((prevState) => ({ ...prevState, isEdit: false }));
   };
 
   const deleteFilmFromList = (id: string) => {
     setReviews((prevState) => {
       return prevState.filter((element) => element.id !== id);
     });
+  };
+
+  const editReview = (id: string) => {
+    setIsFilmOpen(() => true);
+
+    if (myRef.current) {
+      setEditedReview(() => ({ isEdit: true, id: id }));
+      const text = reviews.find((ele) => ele.id === id);
+      myRef.current.value = text ? text.text : "";
+    }
   };
 
   return (
@@ -87,7 +110,7 @@ const Notes = () => {
         ></textarea>
         <div className={styles["btn-wrapper"]}>
           <ButtonElement
-            action="Add"
+            action={editedReview.isEdit ? "Update" : "Add"}
             onClick={submitForm}
             classNameList={"add-btn"}
           />
@@ -102,7 +125,9 @@ const Notes = () => {
         {reviews && reviews.length ? (
           reviews.map((review) => (
             <Note
+              isActive={editedReview.isEdit}
               deleteFilmFromList={() => deleteFilmFromList(review.id)}
+              editReview={() => editReview(review.id)}
               review={review}
               film={review.film}
               key={review.id}

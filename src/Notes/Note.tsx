@@ -2,26 +2,37 @@ import { IReview } from ".";
 import { IFilm } from "../store/slices/filmsSlice";
 import ButtonElement from "../components/custom-components/Button";
 import styles from "./list.module.scss";
-import { useEffect } from "react";
+import classNames from "classnames";
 
 const Note = ({
   review,
   film,
   deleteFilmFromList,
+  editReview,
+  isActive,
 }: {
   review: IReview;
   film: IFilm | null;
   deleteFilmFromList: () => void;
+  editReview: () => void;
+  isActive: boolean;
 }) => {
   return (
-    <div className={styles.note}>
+    <div className={classNames(styles.note, { [styles.active]: isActive })}>
       <div className={styles.review}>
         <p>{review.text}</p>
-        <ButtonElement
-          action="Delete"
-          classNameList="clear-btn"
-          onClick={deleteFilmFromList}
-        />
+        <div>
+          <ButtonElement
+            action="Delete"
+            classNameList="clear-btn"
+            onClick={deleteFilmFromList}
+          />
+          <ButtonElement
+            action="Edit"
+            classNameList="add-btn"
+            onClick={editReview}
+          />
+        </div>
       </div>
 
       {film ? (

@@ -30,19 +30,26 @@ $height: 500px;
   width: 550px;
   display: flex;
   margin-top: 20px;
-  border-top: $borderW solid $cyan;
+  padding: 0px 20px 20px 20px;
+  border-bottom: $borderW solid $cyan;
 }
 
 .review {
   width: 400px;
   margin-right: 20px;
-  margin-top: 20px;
   border-right: $borderW solid $cyan;
   box-sizing: border-box;
-  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .film {
   display: flex;
   flex-direction: column;
+}
+
+.active {
+  background-color: rgba(128, 128, 128, 0.205);
+  box-shadow: 10px 5px 20px 1px rgba(41, 32, 218, 0.449);
 }
