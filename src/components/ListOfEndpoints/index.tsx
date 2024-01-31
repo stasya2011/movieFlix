@@ -16,10 +16,11 @@ const endpoints = [
 const ListOfEndpoints = ({ getFilms }: { getFilms: (str: string) => void }) => {
   return (
     <div className={styles.endpoints}>
-      {endpoints.map((endpoint: string) => (
+      {endpoints.map((endpoint: string, i: number) => (
         <CategoryButton
           onClick={() => getFilms(endpoint)}
           category={endpoint}
+          key={endpoint + i}
         />
       ))}
     </div>

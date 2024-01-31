@@ -52,7 +52,7 @@ const ListOfFilms = ({ getFilms }: { getFilms: (str: string) => void }) => {
 
               <ul className={styles["list-wrapper"]}>
                 {films.map((film) => (
-                  <FilmItem film={film} />
+                  <FilmItem film={film} key={film.id} />
                 ))}
               </ul>
             </>

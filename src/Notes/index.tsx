@@ -105,6 +105,7 @@ const Notes = () => {
               deleteFilmFromList={() => deleteFilmFromList(review.id)}
               review={review}
               film={review.film}
+              key={review.id}
             />
           ))
         ) : (
