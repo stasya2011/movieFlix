@@ -1,11 +1,27 @@
+import { IReview } from ".";
 import { IFilm } from "../store/slices/filmsSlice";
+import ButtonElement from "../components/custom-components/Button";
 import styles from "./list.module.scss";
+import { useEffect } from "react";
 
-const Note = ({ review, film }: { review: string; film: IFilm | null }) => {
+const Note = ({
+  review,
+  film,
+  deleteFilmFromList,
+}: {
+  review: IReview;
+  film: IFilm | null;
+  deleteFilmFromList: () => void;
+}) => {
   return (
     <div className={styles.note}>
       <div className={styles.review}>
-        <p>{review}</p>
+        <p>{review.text}</p>
+        <ButtonElement
+          action="Delete"
+          classNameList="clear-btn"
+          onClick={deleteFilmFromList}
+        />
       </div>
 
       {film ? (
