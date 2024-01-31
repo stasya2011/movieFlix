@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { fetchFilm } from "../../utils/api";
 import { useLayoutEffect, useState } from "react";
 import { useAppSelector } from "../../hooks";
@@ -26,6 +26,11 @@ const FilmPage = () => {
         <>
           <h2>{film.title}</h2>
           <img src={film.posterURL} alt={film.title} />
+          <button>
+            <Link to={"/note"} state={{ film: JSON.stringify(film) }}>
+              Copy link
+            </Link>
+          </button>
         </>
       ) : (
         <h3>No found.</h3>

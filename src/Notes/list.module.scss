@@ -1,3 +1,5 @@
+@import "../styles/constants.scss";
+
 $height: 500px;
 
 .wrapper {
@@ -6,8 +8,8 @@ $height: 500px;
   width: 800px;
 
   textarea {
-    background-color: rgba(139, 0, 139, 0.386);
-    border: 2px solid grey;
+    background-color: $backgroundColor;
+    border: 2px solid $cyan;
     border-radius: 20px;
     padding: 10px;
     box-sizing: border-box;
@@ -15,79 +17,62 @@ $height: 500px;
   }
 }
 
-.add-btn {
-  width: 50px;
-  background-color: seagreen;
-  border-radius: 10px;
-  margin-top: 10px;
-  margin-left: 30px;
-  padding: 5px;
-  border: none;
-  color: rgb(247, 243, 243);
-  font-size: 16px;
-
-  &:hover {
-    cursor: pointer;
-    animation: addBtnAnimation 1s ease-in-out;
-  }
-
-  @keyframes addBtnAnimation {
-    0% {
-      transform: scale(1);
-    }
-    25% {
-      transform: scale(1.1) rotate(-10deg);
-    }
-    50% {
-      transform: scale(1.1) rotate(10deg);
-    }
-    75% {
-      transform: scale(1.1) rotate(-10deg);
-    }
-    100% {
-      transform: scale(1) rotate(0deg);
-    }
-  }
+.btn-wrapper {
+  display: flex;
 }
 
-// .item {
-//   width: 80px;
-//   height: 10px;
-//   background-color: #008000;
-//   position: absolute;
-//   bottom: 0;
-//   // animation: animation 3s linear;
+// .add-btn {
+//   width: 50px;
+//   background-color: seagreen;
+//   border-radius: 10px;
+//   margin-top: 10px;
+//   margin-left: 10px;
+//   padding: 5px;
+//   border: none;
+//   color: $dark;
+//   font-size: 16px;
 
-//   @keyframes animation {
+//   &:hover {
+//     cursor: pointer;
+//     animation: addBtnAnimation 1s ease-in-out;
+//   }
+
+//   @keyframes addBtnAnimation {
 //     0% {
-//       transform: translateY(0) scale(1.5) rotate(-20deg);
+//       transform: scale(1);
 //     }
-//     10% {
-//       transform: translateY(10vh) scale(1.5) rotate(20deg);
-//     }
-//     20% {
-//       transform: translateY(20vh) scale(1) rotate(-20deg);
-//     }
-//     30% {
-//       transform: translateY(30vh) scale(1.5) rotate(20deg);
-//     }
-//     40% {
-//       transform: translateY(40vh) scale(1) rotate(-20deg);
+//     25% {
+//       transform: scale(1.1) rotate(-10deg);
 //     }
 //     50% {
-//       transform: translateY(50vh) scale(1.5) scale(1.5) rotate(20deg);
+//       transform: scale(1.1) rotate(10deg);
+//     }
+//     75% {
+//       transform: scale(1.1) rotate(-10deg);
 //     }
 //     100% {
-//       transform: translateY(calc(100vh - 100px)) scale(1) rotate(0);
+//       transform: scale(1) rotate(0deg);
 //     }
 //   }
 // }
 
-// .ball {
-//   width: 20px;
-//   height: 20px;
-//   border-radius: 50%;
-//   background-color: red;
-//   position: absolute;
-//   bottom: 10px;
-// }
+.note {
+  width: 550px;
+  display: flex;
+  margin-top: 20px;
+  border-top: $borderW solid $cyan;
+}
+
+.review {
+  width: 400px;
+  margin-right: 20px;
+  margin-top: 20px;
+  border-right: $borderW solid $cyan;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.film {
+  display: flex;
+  flex-direction: column;
+}
