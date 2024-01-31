@@ -3,29 +3,28 @@ import { useLocation } from "react-router-dom";
 import Note from "./Note";
 import ButtonElement from "../components/custom-components/Button";
 import styles from "./list.module.scss";
+import { IFilm } from "../store/slices/filmsSlice";
+import { v4 as uuidv4 } from "uuid";
 
 interface IReview {
   text: any;
   data: string;
   id: string;
   checked: boolean;
+  film: IFilm | null;
 }
 const Notes = () => {
-  const [reviews, setReviews] = useState<IReview[] | []>([]);
-  const [currentFilm, setCurrentFilm] = useState(null);
-
+  const [reviews, setReviews] = useState<IReview[]>([]);
   const { state } = useLocation();
   const myRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
-    console.log(state);
-    if (state) {
-      const film = JSON.parse(state.film);
+    const data = localStorage.getItem("currentFilms");
 
-      setCurrentFilm(film);
+    if (data) {
+      const initialState = JSON.parse(data);
+      setReviews(() => initialState);
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const clearTextare = () => {
@@ -36,18 +35,18 @@ const Notes = () => {
 
   const submitForm = () => {
     setReviews((prevState) => {
-      console.log("+++ prevState", prevState);
-
       return [
         ...prevState,
         {
           text: myRef.current?.value,
-          id: "3333",
+          id: uuidv4(),
           checked: false,
-          data: "data ",
+          data: "date",
+          film: JSON.parse(state.film),
         },
       ];
     });
+    //
   };
 
   return (
@@ -69,7 +68,10 @@ const Notes = () => {
           />
           <ButtonElement
             action="Clear"
-            onClick={clearTextare}
+            onClick={() => {
+              clearTextare();
+              localStorage.setItem("currentFilms", JSON.stringify(reviews));
+            }}
             classNameList={"clear-btn"}
           />
         </div>
@@ -77,7 +79,7 @@ const Notes = () => {
       <div>
         {reviews && reviews.length ? (
           reviews.map((review) => (
-            <Note review={review.text} film={currentFilm} />
+            <Note review={review.text} film={review.film} />
           ))
         ) : (
           <h3>You don't have any movie reviews yet.</h3>
