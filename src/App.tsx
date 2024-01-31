@@ -11,7 +11,7 @@ import ListOfFilms from "./components/ListOfFilms";
 import Layout from "./components/Layout";
 import FilmPage from "./components/FilmPage";
 import styles from "./App.module.scss";
-import List from "./List";
+import List from "./Notes";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -41,8 +41,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<ListOfFilms getFilms={getFilms} />} />
           <Route path={`/${currentCategory}/:id`} element={<FilmPage />} />
-          {/*! TODO */}
-          <Route path="/note" element={<h3>Notes...</h3>} />
+          <Route path="/note" element={<List />} />
           <Route path="*" element={<h2>Error..</h2>} />
         </Route>
       </Routes>

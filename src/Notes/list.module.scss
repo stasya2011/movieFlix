@@ -1,0 +1,93 @@
+$height: 500px;
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 800px;
+
+  textarea {
+    background-color: rgba(139, 0, 139, 0.386);
+    border: 2px solid grey;
+    border-radius: 20px;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+}
+
+.add-btn {
+  width: 50px;
+  background-color: seagreen;
+  border-radius: 10px;
+  margin-top: 10px;
+  margin-left: 30px;
+  padding: 5px;
+  border: none;
+  color: rgb(247, 243, 243);
+  font-size: 16px;
+
+  &:hover {
+    cursor: pointer;
+    animation: addBtnAnimation 1s ease-in-out;
+  }
+
+  @keyframes addBtnAnimation {
+    0% {
+      transform: scale(1);
+    }
+    25% {
+      transform: scale(1.1) rotate(-10deg);
+    }
+    50% {
+      transform: scale(1.1) rotate(10deg);
+    }
+    75% {
+      transform: scale(1.1) rotate(-10deg);
+    }
+    100% {
+      transform: scale(1) rotate(0deg);
+    }
+  }
+}
+
+// .item {
+//   width: 80px;
+//   height: 10px;
+//   background-color: #008000;
+//   position: absolute;
+//   bottom: 0;
+//   // animation: animation 3s linear;
+
+//   @keyframes animation {
+//     0% {
+//       transform: translateY(0) scale(1.5) rotate(-20deg);
+//     }
+//     10% {
+//       transform: translateY(10vh) scale(1.5) rotate(20deg);
+//     }
+//     20% {
+//       transform: translateY(20vh) scale(1) rotate(-20deg);
+//     }
+//     30% {
+//       transform: translateY(30vh) scale(1.5) rotate(20deg);
+//     }
+//     40% {
+//       transform: translateY(40vh) scale(1) rotate(-20deg);
+//     }
+//     50% {
+//       transform: translateY(50vh) scale(1.5) scale(1.5) rotate(20deg);
+//     }
+//     100% {
+//       transform: translateY(calc(100vh - 100px)) scale(1) rotate(0);
+//     }
+//   }
+// }
+
+// .ball {
+//   width: 20px;
+//   height: 20px;
+//   border-radius: 50%;
+//   background-color: red;
+//   position: absolute;
+//   bottom: 10px;
+// }
