@@ -1,4 +1,4 @@
-@import "../styles/constants.scss";
+@import "../../styles/constants.scss";
 
 $height: 500px;
 
@@ -20,6 +20,10 @@ $height: 500px;
       color: $dark;
     }
   }
+
+  @media screen and (max-width: 600px) {
+    width: 300px;
+  }
 }
 
 .btn-wrapper {
@@ -32,6 +36,11 @@ $height: 500px;
   margin-top: 20px;
   padding: 0px 20px 20px 20px;
   border-bottom: $borderW solid $cyan;
+
+  @media screen and (max-width: 600px) {
+    width: 300px;
+    flex-direction: column;
+  }
 }
 
 .review {
@@ -42,6 +51,11 @@ $height: 500px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  @media screen and (max-width: 600px) {
+    width: 300px;
+    border-right: none;
+  }
 }
 
 .film {

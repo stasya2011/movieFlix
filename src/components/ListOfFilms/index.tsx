@@ -11,7 +11,6 @@ const ListOfFilms = ({ getFilms }: { getFilms: (str: string) => void }) => {
   const dispatch = useAppDispatch();
   const { films, isLoading } = useAppSelector((state) => state.films);
   const ref = useRef<HTMLInputElement | null>(null);
-
   const backToPrevState = (films: string) => {
     dispatch(toggleLoading(true));
     dispatch(setFilms({ films: JSON.parse(films) }));
@@ -26,12 +25,14 @@ const ListOfFilms = ({ getFilms }: { getFilms: (str: string) => void }) => {
       const selectedArr = films.filter((film) =>
         film.title.toLocaleLowerCase().includes(key.toLocaleLowerCase())
       );
+
       if (selectedArr.length) {
         dispatch(setFilms({ films: selectedArr }));
       }
       dispatch(toggleLoading(false));
     } else {
       const films = localStorage.getItem("prevFilms");
+
       if (films) {
         backToPrevState(films);
       }
@@ -57,7 +58,7 @@ const ListOfFilms = ({ getFilms }: { getFilms: (str: string) => void }) => {
               </ul>
             </>
           ) : (
-            "No result was found for your query."
+            <p>No result was found for your query.</p>
           )}
         </div>
       )}

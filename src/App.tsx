@@ -11,7 +11,7 @@ import ListOfFilms from "./components/ListOfFilms";
 import Layout from "./components/Layout";
 import FilmPage from "./components/FilmPage";
 import styles from "./App.module.scss";
-import List from "./Notes";
+import List from "./components/Notes";
 
 function App() {
   const dispatch = useAppDispatch();

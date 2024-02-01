@@ -1,6 +1,6 @@
 import { IReview } from ".";
-import { IFilm } from "../store/slices/filmsSlice";
-import ButtonElement from "../components/custom-components/Button";
+import { IFilm } from "../../store/slices/filmsSlice";
+import ButtonElement from "../custom-components/Button";
 import styles from "./list.module.scss";
 import classNames from "classnames";
 

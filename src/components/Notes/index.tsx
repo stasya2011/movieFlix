@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { IFilm } from "../store/slices/filmsSlice";
+import { IFilm } from "../../store/slices/filmsSlice";
 import { v4 as uuidv4 } from "uuid";
 import Note from "./Note";
-import ButtonElement from "../components/custom-components/Button";
+import ButtonElement from "../custom-components/Button";
 import styles from "./list.module.scss";
 
 export interface IReview {
