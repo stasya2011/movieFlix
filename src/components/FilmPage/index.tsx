@@ -3,6 +3,8 @@ import { fetchFilm } from "../../utils/api";
 import { useLayoutEffect, useState } from "react";
 import { useAppSelector } from "../../hooks";
 import { IFilm } from "../../store/slices/filmsSlice";
+import ButtonElement from "../custom-components/Button";
+import styles from "./filmPage.module.scss";
 
 const FilmPage = () => {
   const [film, setFilm] = useState<IFilm>();
@@ -21,16 +23,20 @@ const FilmPage = () => {
   }, [currentCategory, id]);
 
   return (
-    <div>
+    <div className={styles.wrapper}>
       {film ? (
         <>
           <h2>{film.title}</h2>
           <img src={film.posterURL} alt={film.title} />
-          <button>
+          <div>
             <Link to={"/note"} state={{ film: JSON.stringify(film) }}>
-              Copy link
+              <ButtonElement
+                action="Add a movie review"
+                classNameList="add-btn"
+                onClick={() => console.log("click")}
+              />
             </Link>
-          </button>
+          </div>
         </>
       ) : (
         <h3>No found.</h3>
