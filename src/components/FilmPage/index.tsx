@@ -27,7 +27,7 @@ const FilmPage = () => {
       {film ? (
         <>
           <h2>{film.title}</h2>
-          <img src={film.posterURL} alt={film.title} />
+          <img src={film.posterURL} alt={film.title} width={300} />
           <div>
             <Link to={"/note"} state={{ film: JSON.stringify(film) }}>
               <ButtonElement
